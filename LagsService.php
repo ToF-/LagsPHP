@@ -65,12 +65,11 @@ class LagsService {
         }
         // Ajoute un ordre; le CA est recalculé en conséquence
 
-        function AjouteOrdre() {
+        function AjouterOrdre() {
             print("AJOUTER UN ORDRE\n");
             print("FORMAT = ID;DEBUT;FIN;PRIX\n");
             $line = readline();
             $champs = explode(";", $line);
-            var_dump($champs);
             $id = $champs[0];
             $dep = intval($champs[1]);
             $dur = intval($champs[2]);
@@ -112,7 +111,6 @@ class LagsService {
             foreach($this->ListOrdre as $ordre) {
                 array_push($cas,$ordre->prix);
             }
-            var_dump($cas);
 
             for($i = count($this->ListOrdre)-2; $i>=0; $i--) {
                 $ordre = $this->ListOrdre[$i];
@@ -156,15 +154,9 @@ class LagsService {
                 if($this->ListOrdre[$i]->id=$id)
                     unset($this->ListOrdre[$i]);
             }
-            writeOrdres("ORDRES.CSV");
+            $this->writeOrdres("ORDRES.CSV");
 
         }
 }
-
-
-$lagsService = new LagsService();
-$lagsService->getFichierOrder("ORDRES.CSV");
-$lagsService->Liste();
-$lagsService->CalculerLeCA(true);
 
 ?>
